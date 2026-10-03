@@ -102,7 +102,7 @@ button{font-family:inherit}
 .cta::after{content:"→"}
 
 /* 駐車場の案内 */
-.pop{position:absolute;inset:0;z-index:20;display:grid;place-items:center;padding:18px;background:rgba(46,29,24,.55);opacity:0;pointer-events:none;transition:opacity .4s}
+.pop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:18px;background:rgba(46,29,24,.55);opacity:0;pointer-events:none;transition:opacity .4s}
 .pop.on{opacity:1;pointer-events:auto}
 .sheet{width:min(520px,100%);background:var(--cream);border-radius:28px;padding:24px 24px 22px;box-shadow:0 24px 50px rgba(0,0,0,.4);transform:translateY(20px);transition:transform .5s var(--ease)}
 .pop.on .sheet{transform:none}
@@ -112,6 +112,128 @@ button{font-family:inherit}
 .sheet .nt{margin-top:10px;font-size:12px;color:var(--sub)}
 .sheet button{margin-top:14px;border:0;background:var(--ink);color:#fff;font-weight:900;padding:9px 24px;border-radius:999px;cursor:pointer}
 .ai{position:absolute;right:12px;top:calc(clamp(14px,2.4vw,30px) + 44px);z-index:7;font-size:11px;background:rgba(255,255,255,.92);padding:1px 10px;border-radius:999px;color:#6a5258}
+
+/* ===== 下層：セクションごとに型を変える ===== */
+.after{position:relative;background:var(--cream)}
+.sec{position:relative;max-width:1060px;margin:0 auto;padding:96px 22px}
+@media(min-width:900px){.sec{padding:130px 40px}}
+.kk{display:inline-block;font-family:"Fredoka",sans-serif;font-weight:600;color:var(--red);font-size:20px;letter-spacing:.08em;margin-bottom:6px}
+h2.h{font-weight:900;font-size:clamp(24px,4.4vw,44px);line-height:1.45;letter-spacing:.05em;margin-bottom:20px}
+h2.h em{font-style:normal;background:linear-gradient(transparent 62%,var(--gold) 62%);padding:0 3px}
+.ld{color:var(--sub);max-width:600px}
+.nt{font-size:12.5px;color:var(--sub);line-height:1.8;margin-top:14px}
+.js .fd{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .fd.in{opacity:1;transform:none}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:rgba(255,244,226,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 3px 12px rgba(110,30,20,.18);transform:translateY(-110%);transition:transform .4s}
+.navbar.show{transform:none}
+.navbar b{font-family:"Fredoka",sans-serif;font-weight:600;color:var(--red);font-size:22px}
+.navbar nav{display:none;gap:20px;font-size:13px;font-weight:700}
+.navbar nav a{text-decoration:none}
+.navbar .cta{padding:7px 18px;font-size:13px;box-shadow:0 4px 0 var(--red2)}
+@media(min-width:900px){.navbar nav{display:flex}.navbar{padding:8px 40px}}
+
+/* 1 いま：横にスライドする「今月のお知らせ」カード */
+.now{background:var(--red);color:#fff;overflow:hidden}
+.now .sec{padding-top:80px;padding-bottom:80px}
+.now .kk{color:var(--gold)}
+.now h2.h em{color:var(--ink)}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 18px;margin:0 -22px;padding-left:22px;padding-right:22px;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{height:6px}.rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.5);border-radius:3px}
+.nc{flex:none;width:min(300px,72vw);scroll-snap-align:start;background:var(--cream);color:var(--ink);border-radius:26px;padding:22px 20px;box-shadow:0 10px 0 rgba(0,0,0,.14)}
+.nc .tg{display:inline-block;background:var(--red);color:#fff;font-weight:900;font-size:12px;padding:1px 12px;border-radius:999px}
+.nc h3{font-weight:900;font-size:19px;line-height:1.4;margin:8px 0 6px}
+.nc p{font-size:14px;line-height:1.7;color:var(--sub)}
+.nc .pr{font-weight:900;color:var(--red);font-size:15px;margin-top:6px}
+.rail::after{content:"";flex:none;width:6px}
+.drag{margin-top:2px;font-size:12px;font-weight:700;opacity:.9}
+
+/* 2 3世代：年代を選ぶと、おすすめが変わる */
+.gen .btns{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 22px}
+.gb{border:3px solid var(--ink);background:#fff;color:var(--ink);font-weight:900;font-size:15px;padding:8px 20px;border-radius:999px;cursor:pointer;transition:transform .2s}
+.gb:hover{transform:translateY(-2px)}
+.gb[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:0 5px 0 var(--gold)}
+.gb:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.rec{display:grid;gap:16px;align-items:center;background:#fff;border-radius:30px;padding:18px;box-shadow:0 12px 30px rgba(110,30,20,.16)}
+@media(min-width:760px){.rec{grid-template-columns:1fr 1fr;padding:24px;gap:36px}}
+.rec .ph{position:relative;aspect-ratio:1/1;border-radius:22px;overflow:hidden;background:#f1dfc6}
+.rec .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.1);transition:opacity .7s,transform 1.1s var(--ease)}
+.rec .ph img.on{opacity:1;transform:none}
+.rec .ph small{position:absolute;left:10px;bottom:8px;font-size:11px;background:rgba(255,255,255,.9);padding:1px 10px;border-radius:999px;color:#6a5258;z-index:2}
+.rec h3{font-weight:900;font-size:clamp(20px,3vw,28px);line-height:1.4;margin-bottom:8px}
+.rec p{color:var(--sub)}
+.rec .pk2{display:inline-block;margin-top:10px;background:var(--gold);font-weight:900;font-size:13px;padding:2px 14px;border-radius:999px}
+
+/* 3 メニュー：折りたたみ式のメニュー帳 */
+.menu{background:#fff}
+.mb{display:grid;gap:12px;margin-top:6px}
+@media(min-width:800px){.mb{grid-template-columns:1fr 1fr;gap:16px}}
+.mi{border:3px solid var(--ink);border-radius:22px;background:var(--cream);overflow:hidden}
+.mi summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 18px;font-weight:900;font-size:18px;min-height:56px}
+.mi summary::-webkit-details-marker{display:none}
+.mi summary i{font-style:normal;flex:none;width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:18px}
+.mi summary::after{content:"+";margin-left:auto;font-size:26px;color:var(--red);transition:transform .25s}
+.mi[open] summary::after{transform:rotate(45deg)}
+.mi .bd{padding:0 18px 16px 70px;font-size:14.5px;color:var(--sub);line-height:1.8}
+.mi:focus-within{box-shadow:0 0 0 3px var(--gold)}
+
+/* 4 かんたん：来店の準備（時間・駐車場・予約）をスタンプラリー風に */
+.steps2{display:grid;gap:14px;counter-reset:q}
+@media(min-width:800px){.steps2{grid-template-columns:repeat(3,1fr)}}
+.sp{counter-increment:q;position:relative;background:#fff;border-radius:26px;padding:34px 20px 20px;border:3px dashed var(--red)}
+.sp::before{content:counter(q);position:absolute;left:18px;top:-20px;width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-weight:600;font-size:22px;box-shadow:0 4px 0 var(--red2)}
+.sp h3{font-weight:900;font-size:18px;margin-bottom:6px}
+.sp p{font-size:14.5px;color:var(--sub);line-height:1.8}
+.sp .lk{margin-top:10px;display:inline-block;font-weight:900;font-size:13.5px;color:var(--red);border:0;background:none;padding:0;border-bottom:3px solid var(--gold);cursor:pointer}
+
+/* 5 カレンダー：来店日をタップして、その日の営業時間を確認 */
+.calw{display:grid;gap:18px;align-items:start}
+@media(min-width:800px){.calw{grid-template-columns:1.1fr .9fr;gap:34px}}
+.cal{background:#fff;border-radius:26px;padding:18px;box-shadow:0 12px 30px rgba(110,30,20,.14)}
+.cal .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.cal .hd b{font-family:"Fredoka",sans-serif;font-weight:600;font-size:24px;color:var(--red)}
+.cal .hd span{font-size:12px;color:var(--sub)}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cg .w{font-size:11.5px;font-weight:900;color:var(--sub);padding:2px 0}
+.cg button{aspect-ratio:1;border:0;border-radius:50%;background:var(--cream);font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:transform .15s}
+.cg button:hover{transform:scale(1.1)}
+.cg button.s{background:var(--red);color:#fff}
+.cg button.x{background:transparent;color:#bbb;cursor:default}
+.cg button:focus-visible{outline:3px solid var(--ink);outline-offset:1px}
+.cg .e{visibility:hidden}
+.cres{background:var(--gold);border-radius:26px;padding:22px 20px;font-weight:900;font-size:19px;line-height:1.55;min-height:150px;display:grid;align-content:center}
+.cres small{display:block;font-weight:700;font-size:12.5px;margin-top:8px;color:#5a3d2a}
+
+/* 6 FAQ：吹き出しの会話 */
+.talk{display:grid;gap:12px;max-width:760px}
+.q{justify-self:end;max-width:86%;background:var(--ink);color:#fff;border-radius:22px 22px 4px 22px;padding:10px 16px;font-weight:700;font-size:15px;cursor:pointer;text-align:left;border:0;font-family:inherit}
+.q:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.a{justify-self:start;max-width:92%;background:#fff;border:3px solid var(--red);border-radius:22px 22px 22px 4px;padding:12px 16px;font-size:15px;color:var(--ink);display:none}
+.q[aria-expanded="true"]+.a{display:block;animation:pop .45s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}}
+
+/* 7 アクセス＋ラスト：駅から来る道すじ */
+.road{background:var(--ink);color:#fff;overflow:hidden}
+.road .kk{color:var(--gold)}
+.road h2.h em.gl{color:var(--cream);background:linear-gradient(transparent 62%,var(--red) 62%)}
+.path{position:relative;display:grid;gap:0;margin-top:10px;max-width:640px}
+.pt{position:relative;padding:0 0 28px 54px}
+.pt::before{content:"";position:absolute;left:19px;top:6px;bottom:-6px;border-left:4px dotted var(--gold)}
+.pt:last-child::before{display:none}
+.pt i{position:absolute;left:0;top:0;width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-style:normal;font-weight:900;font-size:16px}
+.pt b{display:block;font-weight:900;font-size:18px}
+.pt span{font-size:14.5px;opacity:.9}
+.road .btn2{display:inline-flex;align-items:center;gap:8px;margin-top:6px;background:var(--gold);color:var(--ink);font-weight:900;text-decoration:none;padding:10px 22px;border-radius:999px}
+.road .info{margin-top:26px;font-size:13px;opacity:.85;line-height:1.9}
+.fin{text-align:center;background:var(--red);color:#fff;padding:90px 22px 120px;position:relative;overflow:hidden}
+.fin h2{font-weight:900;font-size:clamp(26px,5vw,52px);line-height:1.4;margin-bottom:16px}
+.fin p{max-width:520px;margin:0 auto 24px;opacity:.95}
+.fin .cta{background:#fff;color:var(--red);box-shadow:0 6px 0 var(--ink)}
+.fin .cta:hover{box-shadow:0 2px 0 var(--ink)}
+.fin .ps{margin-top:30px;font-size:14px;opacity:.92}
+.fin .tel{margin-top:14px;font-size:14px;font-weight:700}
+.fin .tel a{border-bottom:3px solid var(--gold);text-decoration:none}
+@media(prefers-reduced-motion:reduce){.js .fd{opacity:1;transform:none;transition:none}}
+
 footer{padding:12px 20px 22px;text-align:center;font-size:12px;color:var(--sub);background:var(--cream)}
 
 @media(max-width:760px){
@@ -140,7 +262,7 @@ footer{padding:12px 20px 22px;text-align:center;font-size:12px;color:var(--sub);
 </style>
 </head>
 <body>
-<div class="demo">これはカフェ コクシネル様向けに作ったデモ（トップページのみ・非公開の見本）です。内容はInstagramの公開情報をもとにしています。</div>
+<div class="demo">これはカフェ コクシネル様向けに作ったデモ（非公開の見本）です。内容はInstagramの公開情報をもとにしています。</div>
 <main>
 <section class="stage" id="stage" aria-label="カフェ コクシネル トップ">
   <div class="cloth" aria-hidden="true"></div>
@@ -201,8 +323,107 @@ footer{padding:12px 20px 22px;text-align:center;font-size:12px;color:var(--sub);
     </div>
   </div>
 </section>
+
+<div class="after" id="after">
+<div class="navbar" id="navbar"><b>coccinelle</b><nav aria-label="ページ内メニュー"><a href="#now">今月</a><a href="#gen">おすすめ</a><a href="#menu">メニュー</a><a href="#ready">来店前に</a><a href="#cal">営業日</a><a href="#faq">質問</a><a href="#road">アクセス</a></nav><a class="cta" data-cta href="https://www.instagram.com/cafe.coccinelle/" target="_blank" rel="noopener">DMで予約</a></div>
+
+<section class="now" id="now"><div class="sec">
+  <span class="kk fd">NOW</span>
+  <h2 class="h fd">今月の、<em>お知らせ</em>。</h2>
+  <div class="rail fd" tabindex="0" aria-label="今月のお知らせ（横にスクロール）">
+    <article class="nc"><span class="tg">予約制</span><h3>アフタヌーンティー（洋）<br>てんとう虫のお茶会</h3><p>10月から、1日10食限定。予約優先です。月替わりのワッフル（10月はモンブラン）。</p><p class="pr">3,000円（税込3,300円）</p></article>
+    <article class="nc"><span class="tg">完全予約制</span><h3>アフタヌーンティー（和）<br>乙姫様のおもてなし</h3><p>10月から、1日8食限定。玉手箱を開けると、小さなおにぎり、小鉢、和菓子。急須で淹れる日本茶つき。</p></article>
+    <article class="nc"><span class="tg">かき氷</span><h3>在庫限りで、提供予定</h3><p>9月末までの予定でしたが、10月も、最終仕入れの在庫限りで提供予定です。詳細は、月のカレンダーのお知らせで。</p></article>
+    <article class="nc"><span class="tg">営業時間</span><h3>平日は、夜まで</h3><p>平日9:30〜20:30。20:30〜21:30（L.O）は、予約のみ。土・祝は11:00〜18:00。日曜定休。</p></article>
+  </div>
+  <p class="drag fd">← 横に、スライドできます →</p>
+  <p class="nt fd" style="color:#ffe3d8">※ お知らせは、店のInstagramの投稿をもとにした下書きです。最新の内容は、Instagramで更新されます。</p>
+</div></section>
+
+<section id="gen"><div class="sec">
+  <span class="kk fd">FOR EVERYONE</span>
+  <h2 class="h fd">3世代の、<em>それぞれ</em>に。</h2>
+  <p class="ld fd">誰と来るかで、おすすめが変わります。選んでみてください。</p>
+  <div class="btns fd" role="group" aria-label="誰と来ますか">
+    <button class="gb" data-i="0" aria-pressed="true">おじいちゃん・おばあちゃんと</button>
+    <button class="gb" data-i="1" aria-pressed="false">子どもと</button>
+    <button class="gb" data-i="2" aria-pressed="false">ひとりで・友だちと</button>
+  </div>
+  <div class="rec fd">
+    <div class="ph"><img class="on" src="assets/j.jpg" alt=""><img src="assets/c2.jpg" alt=""><img src="assets/w.jpg" alt=""><small>※ イメージ（AI生成）</small></div>
+    <div><h3 id="rt">和のアフタヌーンティーで、ゆっくり。</h3><p id="rp">急須で淹れる日本茶と、小さなおにぎり、和菓子。玉手箱を開ける楽しみを、おじいちゃん・おばあちゃんと。</p><span class="pk2" id="rk">1日8食限定・完全予約制</span></div>
+  </div>
+  <p class="nt fd">※ おすすめは、メニューの組み合わせの例です。実際のご案内は、お店にご確認のうえ整えます。</p>
+</div></section>
+
+<section class="menu" id="menu"><div class="sec">
+  <span class="kk fd">MENU</span>
+  <h2 class="h fd">メニュー帳を、<em>ひらく</em>。</h2>
+  <div class="mb fd">
+    <details class="mi"><summary><i>洋</i>てんとう虫のお茶会</summary><div class="bd">上段：アメリカンクッキー、苺のパンナコッタ、フルーツ、グリークヨーグルト（自家製いちごソース）、ミニガトーショコラ。下段：ロールサンド、キャロットラペ・ピクルス、スナック。月替わりのアメリカンワッフルつき。3,000円（税込3,300円）、1日10食限定。</div></details>
+    <details class="mi"><summary><i>和</i>乙姫様のおもてなし</summary><div class="bd">玉手箱を開けると、小さなおにぎりや小鉢、彩り豊かな和菓子。季節のどら焼きと、急須で淹れる日本茶。1日8食限定・完全予約制。<br>※ 料金は確認できていないため、掲載していません。</div></details>
+    <details class="mi"><summary><i>食</i>本格洋食・おばんざい</summary><div class="bd">本格洋食と、選べる8種のおばんざい。内容と料金は、お店にご確認のうえ掲載します。</div></details>
+    <details class="mi"><summary><i>氷</i>かき氷・アサイー</summary><div class="bd">極上アサイー、季節のかき氷（在庫限りで提供予定）。テイクアウトの、食べ歩き仕様もあります。</div></details>
+    <details class="mi"><summary><i>弁</i>お弁当</summary><div class="bd">お弁当は、ご注文を受けてから作ります。内容・料金・受付方法は、確認のうえ掲載します。</div></details>
+    <details class="mi"><summary><i>菓</i>オーダーケーキ</summary><div class="bd">オーダーケーキのご相談を、受け付けています。お申し込みは、DMで。</div></details>
+  </div>
+  <p class="nt fd">※ 内容はInstagramの投稿から読み取ったものです。料金・詳細は、お店にご確認のうえ掲載します。</p>
+</div></section>
+
+<section id="ready"><div class="sec">
+  <span class="kk fd">BEFORE YOU COME</span>
+  <h2 class="h fd">来る前に、<em>3つだけ</em>。</h2>
+  <div class="steps2">
+    <div class="sp fd"><h3>予約するなら、DMかLINE・電話</h3><p>アフタヌーンティーは、予約優先（和は完全予約制）です。予約は、DM・公式LINE・電話で受け付けています。</p></div>
+    <div class="sp fd"><h3>お車は、提携駐車場へ</h3><p>「ONE Park 中山観音駅前」と提携しています。サービス券は、時間のカウントを1時間分減らすタイプです。</p><button class="lk" id="pk2" type="button">くわしく見る</button></div>
+    <div class="sp fd"><h3>営業日を、カレンダーで</h3><p>毎月、営業カレンダーをお知らせしています。下で、日付をタップして、時間を確認できます。</p></div>
+  </div>
+</div></section>
+
+<section class="menu" id="cal"><div class="sec">
+  <span class="kk fd">CALENDAR</span>
+  <h2 class="h fd">行く日を、<em>タップ</em>。</h2>
+  <div class="calw">
+    <div class="cal fd"><div class="hd"><b>10月</b><span>※ 見本の日付（日曜休み）</span></div><div class="cg" id="cg"></div></div>
+    <div class="cres fd" id="cres" aria-live="polite">日付をタップすると、その日の営業時間が出ます。<small>見本です。</small></div>
+  </div>
+  <p class="nt fd">※ 平日・土祝・日曜の別は、Instagramの案内をもとにしています。臨時のお休みは、毎月のカレンダーで、お知らせします。</p>
+</div></section>
+
+<section id="faq"><div class="sec">
+  <span class="kk fd">Q&amp;A</span>
+  <h2 class="h fd">よくある、<em>おたずね</em>。</h2>
+  <div class="talk fd" id="talk">
+    <button class="q" aria-expanded="false">予約は、どうやってしますか？</button><div class="a">DM、公式LINE、お電話で、受け付けています。アフタヌーンティーは、予約優先（和は完全予約制）です。</div>
+    <button class="q" aria-expanded="false">駐車場は、ありますか？</button><div class="a">提携駐車場「ONE Park 中山観音駅前」があります。サービス券は、時間のカウントを1時間分減らすタイプです（1会計1,500円以上で1枚）。</div>
+    <button class="q" aria-expanded="false">夜も、やっていますか？</button><div class="a">平日は20:30まで。20:30〜21:30（L.O）は、予約のみ対応です。土・祝は、11:00〜18:00です。</div>
+    <button class="q" aria-expanded="false">日曜日は？</button><div class="a">日曜日は、定休日です。</div>
+    <button class="q" aria-expanded="false">お弁当は、いつでも頼めますか？</button><div class="a">お弁当は、ご注文を受けてから、お作りします。受付方法は、DMなどでご相談ください。</div>
+  </div>
+</div></section>
+
+<section class="road" id="road"><div class="sec">
+  <span class="kk fd">ACCESS</span>
+  <h2 class="h fd">駅から、<em class="gl">すぐ</em>。</h2>
+  <div class="path fd">
+    <div class="pt"><i>1</i><b>阪急中山観音駅</b><span>改札を出て、すぐ近くです。</span></div>
+    <div class="pt"><i>2</i><b>カフェ コクシネル</b><span>てんとう虫の、看板が目印です。</span></div>
+    <div class="pt"><i>P</i><b>お車の方は</b><span>提携駐車場「ONE Park 中山観音駅前」をご利用ください。</span></div>
+  </div>
+  <a class="btn2 fd" href="https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%82%AF%E3%82%B7%E3%83%8D%E3%83%AB%20%E5%AE%9D%E5%A1%9A%E5%B8%82%E4%B8%AD%E5%B1%B1" target="_blank" rel="noopener">地図で、探す →</a>
+  <p class="info fd">営業時間：平日 9:30〜20:30／土・祝 11:00〜18:00／日曜定休<br>電話：0797-62-8130（地図の公開情報）<br>※ 住所・看板の詳細は、確認のうえ掲載します。</p>
+</div></section>
+
+<section class="fin" id="fin">
+  <h2 class="fd">3世代で、<br>ひとつの席へ。</h2>
+  <p class="fd">アフタヌーンティーのご予約・ご相談は、DMで。お気軽にどうぞ。</p>
+  <a class="cta fd" data-cta href="https://www.instagram.com/cafe.coccinelle/" target="_blank" rel="noopener">DMで予約する</a>
+  <p class="tel fd">お電話でも：<a href="tel:0797628130">0797-62-8130</a></p>
+  <p class="ps fd">追伸。てんとう虫は、幸せを運ぶと言われています。ご来店を、お待ちしています。</p>
+</section>
+</div>
 </main>
-<footer>写真はAI生成のイメージです。お店の実際のお料理の写真ではありません。「和」の料金・メニュー内容は、確認のうえ掲載します。</footer>
+<footer>写真はAI生成のイメージです。お店の実際のお料理の写真ではありません。「和」の料金・営業日・メニューの詳細などは、確認のうえ掲載します。</footer>
 
 <script>
 (function(){
@@ -239,6 +460,36 @@ footer{padding:12px 20px 22px;text-align:center;font-size:12px;color:var(--sub);
   document.getElementById("pkx").addEventListener("click",function(){pop.classList.remove("on")});
   pop.addEventListener("click",function(e){if(e.target===pop)pop.classList.remove("on")});
   document.addEventListener("keydown",function(e){if(e.key==="Escape")pop.classList.remove("on")});
+
+
+  /* ---- 下層 ---- */
+  var after=document.getElementById("after"),navbar=document.getElementById("navbar");
+  var onS=function(){navbar.classList.toggle("show",window.scrollY>stage.offsetHeight*.8)};
+  window.addEventListener("scroll",onS,{passive:true});onS();
+  var fds=document.querySelectorAll(".fd");
+  if("IntersectionObserver" in window&&visible){root.classList.add("js");
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});
+    fds.forEach(function(el){io.observe(el)});setTimeout(function(){fds.forEach(function(el){el.classList.add("in")})},5000)}
+  /* 3世代：選ぶと、おすすめが変わる */
+  var R=[{t:"和のアフタヌーンティーで、ゆっくり。",p:"急須で淹れる日本茶と、小さなおにぎり、和菓子。玉手箱を開ける楽しみを、おじいちゃん・おばあちゃんと。",k:"1日8食限定・完全予約制"},
+         {t:"かき氷や、アサイーで、わくわく。",p:"季節のかき氷や、極上アサイー。食べ歩き仕様のテイクアウトもあります（かき氷は、在庫限りで提供予定）。",k:"季節のおやつ"},
+         {t:"洋のアフタヌーンティーで、ごほうび。",p:"二段のスタンドに、スイーツとセイボリー。月替わりのワッフルも。ひとりでも、友だちとでも。",k:"1日10食限定・予約優先"}];
+  var gb=[].slice.call(document.querySelectorAll(".gb")),gi=[].slice.call(document.querySelectorAll(".rec .ph img"));
+  gb.forEach(function(b){b.addEventListener("click",function(){var i=+b.getAttribute("data-i");gb.forEach(function(x,k){x.setAttribute("aria-pressed",k===i?"true":"false")});gi.forEach(function(m,k){m.classList.toggle("on",k===i)});document.getElementById("rt").textContent=R[i].t;document.getElementById("rp").textContent=R[i].p;document.getElementById("rk").textContent=R[i].k})});
+  /* 駐車場（下層からも） */
+  var pk2=document.getElementById("pk2");if(pk2)pk2.addEventListener("click",function(){document.getElementById("pop").classList.add("on")});
+  /* カレンダー（見本：10月、日曜休み） */
+  var cg=document.getElementById("cg"),cr=document.getElementById("cres"),h="";
+  ["日","月","火","水","木","金","土"].forEach(function(d){h+="<span class='w'>"+d+"</span>"});
+  for(var i=0;i<3;i++)h+="<button class='e' disabled></button>";
+  for(var d=1;d<=31;d++){var dow=(d+2)%7;h+="<button data-d='"+d+"' data-w='"+dow+"'"+(dow===0?" class='x' aria-disabled='true'":"")+">"+d+"</button>"}
+  cg.innerHTML=h;
+  cg.addEventListener("click",function(e){var b=e.target.closest("button[data-d]");if(!b)return;var w=+b.getAttribute("data-w"),d=b.getAttribute("data-d");
+    [].slice.call(cg.querySelectorAll(".s")).forEach(function(x){x.classList.remove("s")});b.classList.add("s");
+    var t=w===0?"日曜日は、定休日です。":(w===6?"11:00〜18:00":"9:30〜20:30（20:30〜21:30は予約のみ）");
+    cr.innerHTML="10月"+d+"日（"+"日月火水木金土".charAt(w)+"）<br>"+t+"<small>※ 見本です。祝日・臨時休業は、毎月のカレンダーでお知らせします。</small>"});
+  /* Q&A：質問をタップ→答えが吹き出しで返る */
+  [].slice.call(document.querySelectorAll("#talk .q")).forEach(function(q){q.addEventListener("click",function(){var o=q.getAttribute("aria-expanded")==="true";q.setAttribute("aria-expanded",o?"false":"true")})});
 
   /* てんとう虫：画面の縁を歩く。つつくと、飛んでいく */
   var bug=document.getElementById("bug");
